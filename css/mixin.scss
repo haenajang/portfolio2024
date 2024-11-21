@@ -1,0 +1,77 @@
+@charset "utf-8";
+
+@mixin center {
+  position:absolute;
+  left:50%; top:50%;
+  transform: translate(-50%, -50%);
+}
+// 바코드
+
+@mixin barcode ($scale:1){
+  width:fit-content;
+  height:75px;
+  display: flex;
+  transform:scale($scale);
+  @if($scale > 1){gap:12.5px;}
+  @else{gap:4.67px;}
+  
+  .bar{height:100%;background:#000;}
+  .bar1{width:12px;}
+  .bar2{width:2.61px;}
+  .bar3{width:6.35px;}
+  .bar4{width:4.11px;}
+  .bar5{width:1.5px;}
+}
+
+.barcode{@include barcode(1);}
+
+@mixin ticket {
+  width:calc(100% - 200px);
+  height:50%;
+  margin:auto;
+  display: flex;
+  @include center();
+  .left{
+    width:65%;
+    height:100%;
+    background-color: #EA0723;
+    border-radius: 30px;
+  }
+  .right{
+    width:35%; height:100%;
+    background-color: #fff;
+    border-radius: 30px;
+    border-left:1px dashed #000;
+    position: relative;
+    .title{font-family: var(--sub_font2); font-weight:bold; font-size:40px;padding:20px;}
+    .pr{
+      font-family: var(--sub_font1); font-size:40px; 
+      line-height: 200%;
+    }
+    .title_img{
+      width:7%;
+      position:absolute; right:calc(30px + 10%); bottom:5px;
+    }
+    .barcode_img{
+      width:10%;
+      height:calc(100% - 10px);
+      position: absolute;
+      top:5px; right:25px;
+      overflow: hidden;
+      img{width:100%;}
+    }
+  }
+}
+.ticket{@include ticket();}
+
+@mixin bordered{
+  border:1px solid #000;
+  border-radius: 20px;
+  padding:6px 10px;
+}
+.bordered{@include bordered();}
+@mixin borederd_rec{
+  border: 1px solid #000;
+  padding:6px 10px;
+}
+.bordered_rec{@include borederd_rec();}
